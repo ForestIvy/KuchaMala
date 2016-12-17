@@ -1,4 +1,6 @@
-//http://www.spoj.com/problems/AGGRCOW/
+// http://www.spoj.com/problems/AGGRCOW/
+// https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/ 
+
 
 #include "stdafx.h"
 
