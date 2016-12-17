@@ -6,6 +6,7 @@ x64/
 .vs/
 *.db
 *.opendb
+*.vcxproj.filters
 
 # Windows image file caches
 Thumbs.db
