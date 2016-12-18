@@ -25,9 +25,9 @@ namespace SPOJ
 			sort(m_v.begin(), m_v.end());
 		}
 
-		int MinInterval() const
+		int FindMinInterval()
 		{
-			int minInterval = MaxInterval();
+			int minInterval = FindMaxInterval();
 			for (auto i = 1; i < m_v.size(); i++)
 			{
 				auto cand = m_v[i] - m_v[i - 1];
@@ -37,81 +37,60 @@ namespace SPOJ
 			return minInterval;
 		}
 
-		int MaxInterval() const
+		int FindMaxInterval()
 		{
 			return m_v.back() - m_v.front();
 		}
 
-		pair<int /*cows*/, int /*spacing*/> PlaceAsCloseAs(int dist) const
+		int PlaceAsCloseAs(int dist)
 		{
 			int cows = 1;
 			int cur_dist = 0;
-			int spacing = MaxInterval();
 			for (auto i = 1; i < m_v.size(); i++)
 			{
 				cur_dist += m_v[i] - m_v[i - 1];
 				if (cur_dist >= dist)
 				{
-					spacing = min(spacing, cur_dist);
 					cows++;
-
 					cur_dist = 0;
 				}
-
 			}
-			return make_pair(cows, spacing);
+			return cows;
 		}
-
-		int SpacingFor(int cows) const 
-		{
-			int low = MinInterval();
-			int high = MaxInterval();
-
-			while (low < high)
-			{
-
-			}
-
-			return 0;
-		}
-
 	};
 
 	TEST_CLASS(AGGRCOW)
 	{
 	public:
-		string Dump(pair<int, int> p)
-		{
-			return to_string(p.first) + "," + to_string(p.second);
-		}
-		TEST_METHOD(MinAndMaxBoundaries)
+
+		TEST_METHOD(FindMinAndMaxBoundaries)
 		{
 			vector<int> v{4, 17, 10, 9, 6, 1};
 			CAggrCow ac(v);
-			Assert::AreEqual(1, ac.MinInterval());
-			Assert::AreEqual(16, ac.MaxInterval());
+			Assert::AreEqual(1, ac.FindMinInterval());
+			Assert::AreEqual(16, ac.FindMaxInterval());
 		}
 
-		TEST_METHOD(NumberOfCowsAtGivenSpacing)
+		TEST_METHOD(NumberOfCowsAtGivenDistance)
 		{
 			vector<int> v{ 4, 17, 10, 9, 6, 1 };
 			CAggrCow ac(v);
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(16)).c_str(), L"16");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(15)).c_str(), L"15");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(14)).c_str(), L"14");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(13)).c_str(), L"13");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(12)).c_str(), L"12");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(11)).c_str(), L"11");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(10)).c_str(), L"10");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(9)).c_str(), L"9");
-			Assert::AreEqual("2,16", Dump(ac.PlaceAsCloseAs(8)).c_str(), L"8");
-			Assert::AreEqual("3,7", Dump(ac.PlaceAsCloseAs(7)).c_str(), L"7");
-			Assert::AreEqual("3,7", Dump(ac.PlaceAsCloseAs(6)).c_str(), L"6");
-			Assert::AreEqual("3,7", Dump(ac.PlaceAsCloseAs(5)).c_str(), L"5");
-			Assert::AreEqual("4,4", Dump(ac.PlaceAsCloseAs(4)).c_str(), L"4");
-			Assert::AreEqual("4,4", Dump(ac.PlaceAsCloseAs(3)).c_str(), L"3");
-			Assert::AreEqual("5,2", Dump(ac.PlaceAsCloseAs(2)).c_str(), L"2");
-			Assert::AreEqual("6,1", Dump(ac.PlaceAsCloseAs(1)).c_str(), L"1");
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(16));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(15));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(14));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(13));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(12));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(11));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(10));
+			Assert::AreEqual(2, ac.PlaceAsCloseAs(9));
+			Assert::AreEqual(3, ac.PlaceAsCloseAs(8));
+			Assert::AreEqual(3, ac.PlaceAsCloseAs(7));
+			Assert::AreEqual(3, ac.PlaceAsCloseAs(6));
+			Assert::AreEqual(3, ac.PlaceAsCloseAs(5));
+			Assert::AreEqual(4, ac.PlaceAsCloseAs(4));
+			Assert::AreEqual(4, ac.PlaceAsCloseAs(3));
+			Assert::AreEqual(5, ac.PlaceAsCloseAs(2));
+			Assert::AreEqual(6, ac.PlaceAsCloseAs(1));
 		}
 	};
 }
