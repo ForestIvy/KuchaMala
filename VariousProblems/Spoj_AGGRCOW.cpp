@@ -25,9 +25,9 @@ namespace SPOJ
 			sort(m_v.begin(), m_v.end());
 		}
 
-		int FindMinInterval()
+		int MinInterval()
 		{
-			int minInterval = FindMaxInterval();
+			int minInterval = MaxInterval();
 			for (auto i = 1; i < m_v.size(); i++)
 			{
 				auto cand = m_v[i] - m_v[i - 1];
@@ -37,7 +37,7 @@ namespace SPOJ
 			return minInterval;
 		}
 
-		int FindMaxInterval()
+		int MaxInterval()
 		{
 			return m_v.back() - m_v.front();
 		}
@@ -63,12 +63,12 @@ namespace SPOJ
 	{
 	public:
 
-		TEST_METHOD(FindMinAndMaxBoundaries)
+		TEST_METHOD(FindMinAndMaxIntervals)
 		{
 			vector<int> v{4, 17, 10, 9, 6, 1};
 			CAggrCow ac(v);
-			Assert::AreEqual(1, ac.FindMinInterval());
-			Assert::AreEqual(16, ac.FindMaxInterval());
+			Assert::AreEqual(1, ac.MinInterval());
+			Assert::AreEqual(16, ac.MaxInterval());
 		}
 
 		TEST_METHOD(NumberOfCowsAtGivenDistance)
