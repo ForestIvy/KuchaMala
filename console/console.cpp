@@ -102,8 +102,6 @@ int main()
 		results.push_back(ac.SpacingFor(C));
 	}
 
-	cout << "Results:" << endl;
-
 	for (auto i : results)
 		cout << i << endl;
 

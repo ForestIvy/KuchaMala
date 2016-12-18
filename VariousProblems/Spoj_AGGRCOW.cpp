@@ -92,9 +92,16 @@ namespace SPOJ
 	public:
 		TEST_METHOD(Spacing_SomeValuesNotRealized)
 		{
-			vector<int> v{ 1, 2, 3, 10, 11, 12 };
+			vector<int> v{ 1,2,3, 10,11,12, 21,22,23 };
 			CAggrCow ac(v);
-			Assert::AreEqual(2, ac.SpacingFor(3));
+			Assert::AreEqual(22, ac.SpacingFor(2));
+			Assert::AreEqual(11, ac.SpacingFor(3));
+			Assert::AreEqual(2, ac.SpacingFor(4));
+			Assert::AreEqual(2, ac.SpacingFor(5));
+			Assert::AreEqual(2, ac.SpacingFor(6));
+			Assert::AreEqual(1, ac.SpacingFor(7));
+			Assert::AreEqual(1, ac.SpacingFor(8));
+			Assert::AreEqual(1, ac.SpacingFor(9));
 		}
 
 		TEST_METHOD(Spacing_Duplicates)
