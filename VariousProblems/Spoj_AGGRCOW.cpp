@@ -90,6 +90,13 @@ namespace SPOJ
 	TEST_CLASS(AGGRCOW)
 	{
 	public:
+		TEST_METHOD(Spacing_SomeValuesNotRealized)
+		{
+			vector<int> v{ 1, 2, 3, 10, 11, 12 };
+			CAggrCow ac(v);
+			Assert::AreEqual(2, ac.SpacingFor(3));
+		}
+
 		TEST_METHOD(Spacing_Duplicates)
 		{
 			vector<int> v{ 1, 2, 9, 8, 4, 4, 8, 9, 2, 1 };
@@ -99,9 +106,9 @@ namespace SPOJ
 
 		TEST_METHOD(Spacing_MaxValues)
 		{
-			vector<int> v{ 0,50000000,100000000 };
+			vector<int> v{ 0,500000000,1000000000 };
 			CAggrCow ac(v);
-			Assert::AreEqual(100000000, ac.SpacingFor(2));
+			Assert::AreEqual(1000000000, ac.SpacingFor(2));
 		}
 
 		TEST_METHOD(Spacing_Uniform)
@@ -161,6 +168,23 @@ namespace SPOJ
 			Assert::AreEqual(4, ac.CowsAsCloseAs(4));
 			Assert::AreEqual(4, ac.CowsAsCloseAs(3));
 			Assert::AreEqual(5, ac.CowsAsCloseAs(2));
+			Assert::AreEqual(6, ac.CowsAsCloseAs(1));
+		}
+
+		TEST_METHOD(NumberOfCowsAtGivenDistance_withGaps)
+		{
+			vector<int> v{ 1,2,3,10,11,12 };
+			CAggrCow ac(v);
+			Assert::AreEqual(2, ac.CowsAsCloseAs(11));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(10));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(9));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(8));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(7));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(6));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(5));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(4));
+			Assert::AreEqual(2, ac.CowsAsCloseAs(3));
+			Assert::AreEqual(4, ac.CowsAsCloseAs(2));
 			Assert::AreEqual(6, ac.CowsAsCloseAs(1));
 		}
 	};

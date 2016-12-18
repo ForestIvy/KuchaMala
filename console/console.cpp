@@ -6,93 +6,108 @@
 #include <vector>
 #include <string>
 #include <functional>
-#include <unordered_set>
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
-struct Edge
+class CAggrCow
 {
-	unsigned v1 = 0;
-	unsigned v2 = 0;
-	long cost = 0;
-
-	Edge(unsigned v1_, unsigned v2_, long cost_) : v1(v1_), v2(v2_), cost(cost_) {}
-};
-
-long GetMSTCost(const unordered_set<unsigned>& vertices, const vector<Edge>& edges)
-{
-	unordered_set<unsigned> v_seen;
-	v_seen.insert(edges.front().v1);
-
-	long mst_cost = 0;
-	while (v_seen.size() < vertices.size())
+	vector<int> m_v;
+public:
+	CAggrCow(vector<int> v)
+		: m_v(move(v))
 	{
-		long min_e = 0;
-		bool first = true;
-		Edge found{ 0,0,0 };
-		for (auto& e : edges)
-		{
-			if (v_seen.count(e.v1) == 1 && v_seen.count(e.v2) == 0 ||
-				v_seen.count(e.v2) == 1 && v_seen.count(e.v1) == 0)
-			{
-				if (first || e.cost < min_e)
-				{
-					min_e = e.cost;
-					found = e;
-				}
-				first = false;
-			}
-		}		v_seen.insert(found.v1);
-		v_seen.insert(found.v2);
-		mst_cost += min_e;
+		if (m_v.size() < 2) throw;
+		sort(m_v.begin(), m_v.end());
 	}
 
-	return mst_cost;
-}
+	int MinInterval()
+	{
+		int minInterval = MaxInterval();
+		for (auto i = 1; i < m_v.size(); i++)
+		{
+			auto cand = m_v[i] - m_v[i - 1];
+			if (cand < minInterval)
+				minInterval = cand;
+		}
+		return minInterval;
+	}
+
+	int MaxInterval()
+	{
+		return m_v.back() - m_v.front();
+	}
+
+	int CowsAsCloseAs(int dist)
+	{
+		int cows = 1;
+		int cur_dist = 0;
+		for (auto i = 1; i < m_v.size(); i++)
+		{
+			cur_dist += m_v[i] - m_v[i - 1];
+			if (cur_dist >= dist)
+			{
+				cows++;
+				cur_dist = 0;
+			}
+		}
+		return cows;
+	}
+
+	int SpacingFor(int cows)
+	{
+		int low = MinInterval();
+		int high = MaxInterval();
+
+		while (low < high)
+		{
+			int mid = low + (high + 1 - low) / 2;
+			int at_mid = CowsAsCloseAs(mid);
+
+			if (at_mid >= cows) low = mid;
+			else
+			{
+				if (high == mid)
+					return CowsAsCloseAs(high) < cows ? low : high;
+
+				high = mid;
+			}
+		}
+		return high;
+	}
+};
 
 int main()
 {
 	int tests;
-	cin >> tests;
+	std::cin >> tests;
 
-	vector<long> costs;
-	costs.reserve(tests);
-	while (costs.size() < tests)
+	vector<int> results;
+	for (int cur_test = 0; cur_test < tests; cur_test++)
 	{
-		int price;
-		cin >> price;
+		int N, C;
+		std::cin >> N;
+		std::cin >> C;
 
-		int v_count;
-		cin >> v_count;
-		int e_count;
-		cin >> e_count;
-
-		vector<Edge> edges;
-		edges.reserve(e_count);
-		unordered_set<unsigned> vertices;
-
-		while (edges.size() < e_count)
+		vector<int> points;
+		points.reserve(N);
+		for (int p = 0; p < N; p++)
 		{
-			unsigned v1, v2;
-			long cost;
-			cin >> v1;
-			cin >> v2;
-			cin >> cost;
-
-			edges.push_back(Edge{ v1, v2, cost });
-			vertices.insert(v1);
-			vertices.insert(v2);
+			int point;
+			std::cin >> point;
+			points.push_back(point);
 		}
-		long mst = GetMSTCost(vertices, edges);
-		costs.push_back(mst*price);
+		CAggrCow ac(points);
+		results.push_back(ac.SpacingFor(C));
 	}
 
-	for (auto c : costs)
-		cout << c << endl;
+	cout << "Results:" << endl;
+
+	for (auto i : results)
+		cout << i << endl;
 
 	char quit;
-	cin >> quit;
+	std::cin >> quit;
 	return 0;
 }
-
