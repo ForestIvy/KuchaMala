@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="3n_plus_1.cpp" />
     <ClCompile Include="Spoj_AGGRCOW.cpp" />
+    <ClCompile Include="Spoj_COINS.cpp" />
     <ClCompile Include="Spoj_CSTREET.cpp" />
     <ClCompile Include="HotTub.cpp" />
     <ClCompile Include="JobOffers.cpp" />

@@ -12,6 +12,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
+#if 0
 namespace SPOJ
 {
 	class CAggrCow
@@ -195,4 +196,37 @@ namespace SPOJ
 			Assert::AreEqual(6, ac.CowsAsCloseAs(1));
 		}
 	};
+
+	int main()
+	{
+		int tests;
+		std::cin >> tests;
+
+		vector<int> results;
+		for (int cur_test = 0; cur_test < tests; cur_test++)
+		{
+			int N, C;
+			std::cin >> N;
+			std::cin >> C;
+
+			vector<int> points;
+			points.reserve(N);
+			for (int p = 0; p < N; p++)
+			{
+				int point;
+				std::cin >> point;
+				points.push_back(point);
+			}
+			CAggrCow ac(points);
+			results.push_back(ac.SpacingFor(C));
+		}
+
+		for (auto i : results)
+			cout << i << endl;
+
+		char quit;
+		std::cin >> quit;
+		return 0;
+	}
 }
+#endif
