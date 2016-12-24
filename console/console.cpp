@@ -11,7 +11,9 @@ using namespace std;
 
 int main()
 {
+
 	char q;
 	cin >> q;
 	return 0;
 }
+
