@@ -6,11 +6,14 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
+	int tests = 0;
+	cin >> tests;
 
 	char q;
 	cin >> q;

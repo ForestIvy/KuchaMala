@@ -10,7 +10,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	string NextPalindrome(string number)
@@ -23,7 +23,7 @@ namespace SPOJ
 		if (flipped > number.substr((n + 1) / 2, n / 2)) 
 			return number.replace((n + 1) / 2, n / 2, flipped.c_str());
 
-		long k = n / 2;
+		long k = (n - 1) / 2;
 		while (k >= 0)
 		{
 			auto digit = stoi(number.substr(k, 1));
@@ -45,6 +45,24 @@ namespace SPOJ
 		// all nines
 		string ret(number.length() + 1, '0');
 		return ret.replace(0, 1, "1").replace(number.length(), 1, "1");
+	}
+
+	int main()
+	{
+		int tests = 0;
+		cin >> tests;
+		vector<string> palindromes;
+		for (auto i = 0; i < tests; i++)
+		{
+			string number;
+			cin >> number;
+			palindromes.push_back(NextPalindrome(number));
+		}
+
+		for (auto& p : palindromes)
+			cout << p << endl;
+
+		return 0;
 	}
 
 	TEST_CLASS(PALIN)
@@ -87,19 +105,34 @@ namespace SPOJ
 			Assert::AreEqual<string>("10000001", NextPalindrome("9999999"));
 		}
 
+		TEST_METHOD(EvenLength_NoNinesInTheMiddle)
+		{
+			Assert::AreEqual<string>("33", NextPalindrome("23"));
+			Assert::AreEqual<string>("2222", NextPalindrome("2133"));
+			Assert::AreEqual<string>("214412", NextPalindrome("213312"));
+		}
+
 		TEST_METHOD(EvenLength_NinesInTheMiddle)
 		{
 			Assert::AreEqual<string>("6006", NextPalindrome("5997"));
 			Assert::AreEqual<string>("99000099", NextPalindrome("98999997"));
 		}
 
-		TEST_METHOD(MaxLength)
+		TEST_METHOD(CasesFromSpoj)
 		{
-			Assert::AreEqual<string>(string(1000000, '2'), NextPalindrome(string(999999, '2') + "1"));
-			Assert::AreEqual<string>(string("1") + string(999999, '0') + "1", NextPalindrome(string(1000000, '9')));
-			Assert::AreEqual<string>(string(1000000, '9'), NextPalindrome(string(999999, '9') + "7"));
-			Assert::AreEqual<string>(string("8") + string(999998, '0') + "8", NextPalindrome(string("7") + string(999999, '9')));
+			Assert::AreEqual<string>("818", NextPalindrome("808"));
+			Assert::AreEqual<string>("2222", NextPalindrome("2133"));
+			Assert::AreEqual<string>("111111", NextPalindrome("110111"));
+			Assert::AreEqual<string>("112211", NextPalindrome("111111"));
 		}
+
+		//TEST_METHOD(MaxLength)
+		//{
+		//	Assert::AreEqual<string>(string(1000000, '2'), NextPalindrome(string(999999, '2') + "1"));
+		//	Assert::AreEqual<string>(string("1") + string(999999, '0') + "1", NextPalindrome(string(1000000, '9')));
+		//	Assert::AreEqual<string>(string(1000000, '9'), NextPalindrome(string(999999, '9') + "7"));
+		//	Assert::AreEqual<string>(string("8") + string(999998, '0') + "8", NextPalindrome(string("7") + string(999999, '9')));
+		//}
 	};
 }
 #endif
