@@ -6,7 +6,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include <limits>
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
@@ -27,6 +26,7 @@ namespace SPOJ
 		int m_root = -1;
 
 	public:
+		CTree() {}
 		CTree(const EDGES& edges)
 		{
 			m_root = edges.front().first; // doesn't matter which vertex is asigned to be the root
@@ -37,6 +37,12 @@ namespace SPOJ
 			}
 		}
 		size_t VertexCount() const { return m_vs.size();  }
+		void AddEdge(int v1, int v2)
+		{
+			m_root = v1;
+			m_vs[v1].insert(v2);
+			m_vs[v2].insert(v1);
+		}
 
 		pair<int /*vertex*/, int /*distance*/> FindFurthestFrom(int start)
 		{
@@ -147,6 +153,36 @@ namespace SPOJ
 		{
 			CTree t(EDGES{ { 6,7 },{ 1,2 },{ 5,6 },{ 2,3 },{ 3,4 },{ 4,5 },{ 7,8 } });
 			Assert::AreEqual(7, t.LongestPath());
+		}
+
+		TEST_METHOD(Perf_MaxPathGraph)
+		{
+			CTree t;
+			for (int i = 1; i < 10000; i++)
+				t.AddEdge(i, i + 1);
+
+			Assert::AreEqual(9999, t.LongestPath());
+		}
+
+		TEST_METHOD(Perf_MaxStarGraph)
+		{
+			CTree t;
+			for (int i = 1; i < 10000; i++)
+				t.AddEdge(1, i + 1);
+
+			Assert::AreEqual(2, t.LongestPath());
+		}
+
+		TEST_METHOD(Perf_ChainedStars)
+		{
+			CTree t;
+			for (int j = 0; j < 10; j++)
+			{
+				for (int i = j*1000 + 1; i <= (j + 1) * 1000; i++)
+					t.AddEdge(j * 1000 + 1, i + 1);
+			}
+
+			Assert::AreEqual(11, t.LongestPath());
 		}
 	};
 }
