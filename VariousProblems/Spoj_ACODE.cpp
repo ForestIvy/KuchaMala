@@ -50,6 +50,7 @@ namespace SPOJ
 		return counts.back();
 	}
 
+#if 0
 	int main()
 	{
 		vector<long long> counts;
@@ -70,6 +71,7 @@ namespace SPOJ
 		cin >> q;
 		return 0;
 	}
+#endif
 
 	string PossibleDecodings_(string code)
 	{
@@ -135,6 +137,11 @@ namespace SPOJ
 			Assert::AreEqual<string>("10946", PossibleDecodings_(string(20, '1')), L"for 20");
 			Assert::AreEqual<string>("20365011074", PossibleDecodings_(string(50, '1')), L"for 50");
 			//Assert::AreEqual<string>("0", PossibleDecodings_(string(100, '1')), L"for 100");
+		}
+
+		TEST_METHOD(PerfComp)
+		{
+			Assert::AreEqual<string>("308061521170129", PossibleDecodings_(string(70, '1')), L"for 70");
 		}
 
 		TEST_METHOD(MaxLength)
