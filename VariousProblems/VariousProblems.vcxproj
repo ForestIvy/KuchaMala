@@ -164,6 +164,7 @@
     <ClCompile Include="JobOffers.cpp" />
     <ClCompile Include="NoDupes.cpp" />
     <ClCompile Include="RationalDecimals.cpp" />
+    <ClCompile Include="Spoj_EDIST.cpp" />
     <ClCompile Include="Spoj_InterestingNumber.cpp" />
     <ClCompile Include="Spoj_INVCNT.cpp" />
     <ClCompile Include="Spoj_PALIN.cpp" />
