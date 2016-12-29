@@ -16,7 +16,7 @@ class CStonesCollector
 
 public:
 	CStonesCollector(vector<long> first_row)
-		: m_cache(move(first_row))
+		: m_cache(first_row)
 	{
 	}
 
@@ -79,11 +79,9 @@ int main()
 		results.push_back(sc.GetCurrentMax());
 	}
 
-	for (auto r : results)
-		cout << r << endl;
+	for (size_t r = 0; r < results.size(); r++)
+		cout << results[r] << endl;
 
-	char q;
-	cin >> q;
 	return 0;
 }
 
