@@ -9,7 +9,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	int EditDistance(const string& first, const string& second)
@@ -41,6 +41,29 @@ namespace SPOJ
 		}
 		return prev_i.back();
 	}
+
+#if 0
+	int main()
+	{
+		int tests;
+		cin >> tests;
+		vector<int> results;
+		for (int i = 0; i < tests; i++)
+		{
+			string first, second;
+			cin >> first;
+			cin >> second;
+			results.push_back(EditDistance(first, second));
+		}
+
+		for (auto r : results)
+			cout << r << endl;
+
+		char q;
+		cin >> q;
+		return 0;
+	}
+#endif
 
 	TEST_CLASS(EDIST)
 	{

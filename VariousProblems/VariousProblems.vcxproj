@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3n_plus_1.cpp" />
-    <ClCompile Include="Apoj_PT07Z.cpp" />
+    <ClCompile Include="Spoj_PT07Z.cpp" />
     <ClCompile Include="Spoj_ACODE.cpp" />
     <ClCompile Include="Spoj_AGGRCOW.cpp" />
     <ClCompile Include="Spoj_COINS.cpp" />
@@ -169,6 +169,7 @@
     <ClCompile Include="Spoj_INVCNT.cpp" />
     <ClCompile Include="Spoj_PALIN.cpp" />
     <ClCompile Include="Spoj_POUR1.cpp" />
+    <ClCompile Include="Spoj_PT07Y.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

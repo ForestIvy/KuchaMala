@@ -1,18 +1,20 @@
-// console.cpp : Defines the entry point for the console application.
-//
+// http://www.spoj.com/problems/PT07Y/
 
 #include "stdafx.h"
+#include "CppUnitTest.h"
 
-#include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <queue>
 
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
+#if 1
+namespace SPOJ
+{
 	using EDGES = vector<pair<int, int>>;
 
 	class CGraph
@@ -71,26 +73,40 @@ using namespace std;
 		}
 	};
 
-int main()
-{
-	int v_count, e_count;
-	cin >> v_count;
-	cin >> e_count;
-	bool sureNotATree = (v_count - 1 != e_count);
-
-	CGraph g;
-	for (int i = 0; i < e_count; i++)
+	TEST_CLASS(PT07Y)
 	{
-		int v1, v2;
-		cin >> v1;
-		cin >> v2;
-		if (!sureNotATree) g.AddEdge(v1, v2);
-	}
+	public:
+		TEST_METHOD(IsTree)
+		{
+			EDGES edges{ { 4,3 },{ 4,5 },{ 4,6 },{ 3,1 },{ 3,2 },{ 6,7 },{ 7,8 } };
+			Assert::IsTrue(CGraph(edges).IsTree());
+		}
 
-	cout << (sureNotATree ? "NO" : (e_count == 0 ? "YES" : (g.IsTree() ? "YES" : "NO"))) << endl;
+		TEST_METHOD(ConnectedWithCycle)
+		{
+			EDGES edges{ { 4,3 },{ 4,5 },{ 4,6 },{ 3,1 },{ 3,2 },{ 6,7 },{ 7,8 },{ 4,8 } };
+			Assert::IsFalse(CGraph(edges).IsTree());
+		}
 
-	char q;
-	cin >> q;
-	return 0;
+		TEST_METHOD(DisconnectedSubTrees)
+		{
+			EDGES edges{ { 4,3 },{ 4,5 },{ 4,6 },{ 3,1 },{ 3,2 },{ 6,7 },{ 7,8 },{ 9,10 }, { 9,11 }, { 9,12 }, { 11,13 } };
+			Assert::IsFalse(CGraph(edges).IsTree());
+		}
+
+		TEST_METHOD(DisconnectedWithCycles)
+		{
+			EDGES edges{ { 4,3 },{ 4,5 },{ 4,6 },{ 3,1 },{ 3,2 },{ 6,7 },{ 7,8 },{ 9,10 },{ 9,11 },{ 9,12 },{ 11,13 },{ 12,13 } };
+			Assert::IsFalse(CGraph(edges).IsTree());
+		}
+
+		TEST_METHOD(MaxVertices)
+		{
+			EDGES edges;
+			for (int i = 2; i <= 10000; i++)
+				edges.push_back({ 1, i });
+			Assert::IsTrue(CGraph(edges).IsTree());
+		}
+	};
 }
-
+#endif
