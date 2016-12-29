@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3n_plus_1.cpp" />
+    <ClCompile Include="Spoj_BYTESM2.cpp" />
     <ClCompile Include="Spoj_PT07Z.cpp" />
     <ClCompile Include="Spoj_ACODE.cpp" />
     <ClCompile Include="Spoj_AGGRCOW.cpp" />
