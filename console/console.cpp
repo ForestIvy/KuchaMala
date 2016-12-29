@@ -7,87 +7,80 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
 
 using namespace std;
 
-	using EDGES = vector<pair<int, int>>;
+class CStonesCollector
+{
+	vector<long> m_cache;
 
-	class CGraph
+public:
+	CStonesCollector(vector<long> first_row)
+		: m_cache(move(first_row))
 	{
-		unordered_map<int /*vertex*/, unordered_set<int> /*incident vertices*/> m_vs;
-		int m_root = -1;
-		int m_edges_count = 0;
+	}
 
-	public:
-		CGraph() {}
-		CGraph(const EDGES& edges)
+	long GetCurrentMax()
+	{
+		if (m_cache.empty()) return 0;
+
+		return *max_element(m_cache.begin(), m_cache.end());
+	}
+
+	void AddRow(const vector<long> row)
+	{
+		if (m_cache.empty()) return;
+
+		if (m_cache.size() == 1)
 		{
-			m_root = edges.front().first; // doesn't matter which vertex is asigned to be the root
-			m_edges_count = edges.size();
-			for (auto& e : edges)
-			{
-				m_vs[e.first].insert(e.second);
-				m_vs[e.second].insert(e.first);
-			}
-		}
-		size_t VertexCount() const { return m_vs.size(); }
-		void AddEdge(int v1, int v2)
-		{
-			m_root = v1;
-			m_edges_count++;
-			m_vs[v1].insert(v2);
-			m_vs[v2].insert(v1);
+			m_cache[0] += row[0];
+			return;
 		}
 
-		bool IsTree()
-		{
-			if (m_vs.size() != m_edges_count + 1) return false;
+		vector<long> cache(m_cache.size(), 0);
+		cache[0] = row[0] + max(m_cache[0], m_cache[1]);
+		cache[m_cache.size() - 1] = row.back() + max(m_cache[m_cache.size() - 1], m_cache[m_cache.size() - 2]);
 
-			// check connectedness
-			queue<int> in_progress;
-			in_progress.push(m_root);
+		for (size_t i = 1; i < m_cache.size() - 1; i++)
+			cache[i] = row[i] + max(m_cache[i - 1], max(m_cache[i], m_cache[i + 1]));
 
-			unordered_set<int> seen;
-			seen.insert(m_root);
-
-			while (!in_progress.empty())
-			{
-				auto cur = in_progress.front();
-				for (auto v : m_vs[cur])
-				{
-					if (seen.count(v) == 0)
-					{
-						in_progress.push(v);
-						seen.insert(v);
-					}
-				}
-
-				in_progress.pop();
-			}
-			return seen.size() == m_vs.size();
-		}
-	};
+		m_cache.swap(cache);
+	}
+};
 
 int main()
 {
-	int v_count, e_count;
-	cin >> v_count;
-	cin >> e_count;
-	bool sureNotATree = (v_count - 1 != e_count);
-
-	CGraph g;
-	for (int i = 0; i < e_count; i++)
+	size_t tests;
+	cin >> tests;
+	vector<long> results;
+	while (results.size() < tests)
 	{
-		int v1, v2;
-		cin >> v1;
-		cin >> v2;
-		if (!sureNotATree) g.AddEdge(v1, v2);
+		int h, w;
+		cin >> h >> w;
+		if (h == 0)
+		{
+			results.push_back(0);
+			continue;
+		}
+
+		// first row
+		vector<long> frow(w, 0);
+		for (int i = 0; i < w; i++) cin >> frow[i];
+
+		CStonesCollector sc(frow);
+
+		for (int j = 1; j < h; j++)
+		{
+			vector<long> row(w, 0);
+			for (int i = 0; i < w; i++) cin >> row[i];
+			sc.AddRow(row);
+		}
+
+		results.push_back(sc.GetCurrentMax());
 	}
 
-	cout << (sureNotATree ? "NO" : (e_count == 0 ? "YES" : (g.IsTree() ? "YES" : "NO"))) << endl;
+	for (auto r : results)
+		cout << r << endl;
 
 	char q;
 	cin >> q;
