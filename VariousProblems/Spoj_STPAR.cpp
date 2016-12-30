@@ -14,44 +14,45 @@ using namespace std;
 #if 1
 namespace SPOJ
 {
+	bool CanPass(queue<int>& pending)
+	{
+		int last_through = 0;
+		stack<int> side;
+		while (!pending.empty() || !side.empty())
+		{
+			if (!pending.empty() && pending.front() == last_through + 1)
+			{
+				pending.pop();
+				last_through++;
+			}
+			else if (!side.empty() && side.top() == last_through + 1)
+			{
+				side.pop();
+				last_through++;
+			}
+			else if (!pending.empty())
+			{
+				side.push(pending.front());
+				pending.pop();
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool CanPass(const vector<int>& cars)
+	{
+		queue<int> pending;
+		for (auto c : cars) pending.push(c);
+
+		return CanPass(pending);
+	}
+
 	TEST_CLASS(STPAR)
 	{
-		bool CanPass(queue<int>& pending)
-		{
-			int last_through = 0;
-			stack<int> side;
-			while (!pending.empty() || !side.empty())
-			{
-				if (!pending.empty() && pending.front() == last_through + 1)
-				{
-					pending.pop();
-					last_through++;
-				}
-				else if (!side.empty() && side.top() == last_through + 1)
-				{
-					side.pop();
-					last_through++;
-				}
-				else if (!pending.empty())
-				{ 
-					side.push(pending.front());
-					pending.pop();
-				}
-				else
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		bool CanPass(const vector<int>& cars)
-		{
-			queue<int> pending;
-			for (auto c : cars) pending.push(c);
-
-			return CanPass(pending);
-		}
 	public:
 		TEST_METHOD(SingleCar)
 		{
