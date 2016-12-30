@@ -77,5 +77,8 @@
     <ClCompile Include="Spoj_BYTESM2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spoj_STPAR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
