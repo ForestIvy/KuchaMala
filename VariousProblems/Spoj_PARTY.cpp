@@ -19,7 +19,7 @@ namespace SPOJ
 		Item(int s, int v) : size(s), value(v) {}
 	};
 
-	Item Fill(int capacity, vector<Item> items)
+	Item Fill(int capacity, const vector<Item>& items)
 	{
 		vector<int> values_prev(capacity + 1, 0);
 
@@ -153,7 +153,22 @@ namespace SPOJ
 			auto res = Fill(50, items);
 			Assert::AreEqual(48, res.size);
 			Assert::AreEqual(32, res.value);
+		}
 
+		TEST_METHOD(ZeroCapacity)
+		{
+			vector<Item> items{ { 13,8 },{ 19,10 } };
+			auto res = Fill(0, items);
+			Assert::AreEqual(0, res.size);
+			Assert::AreEqual(0, res.value);
+		}
+
+		TEST_METHOD(ItemsWithZeroValue)
+		{
+			vector<Item> items{ { 3,0 },{ 9,0 } };
+			auto res = Fill(20, items);
+			Assert::AreEqual(0, res.size);
+			Assert::AreEqual(0, res.value);
 		}
 	};
 }
