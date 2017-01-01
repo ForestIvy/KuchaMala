@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="3n_plus_1.cpp" />
     <ClCompile Include="Spoj_BYTESM2.cpp" />
+    <ClCompile Include="Spoj_FARIDA.cpp" />
     <ClCompile Include="Spoj_PARTY.cpp" />
     <ClCompile Include="Spoj_PT07Z.cpp" />
     <ClCompile Include="Spoj_ACODE.cpp" />
