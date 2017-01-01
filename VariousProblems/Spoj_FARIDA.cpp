@@ -9,7 +9,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	long long CollectCoins(const vector<long>& coins)
@@ -42,6 +42,36 @@ namespace SPOJ
 		}
 	};
 
+#if 0
+	int main()
+	{
+		int tests;
+		cin >> tests;
+		vector<long long> results;
+
+		while (results.size() < tests)
+		{
+			int ncoins;
+			cin >> ncoins;
+
+			CoinCollector cc;
+			for (int i = 0; i < ncoins; i++)
+			{
+				long coin;
+				cin >> coin;
+				cc.Inspect(coin);
+			}
+			results.push_back(cc.prev1);
+		}
+
+		for (int i = 0; i < results.size(); i++)
+			cout << "Case " << i + 1 << ": " << results[i] << endl;
+
+		char q;
+		cin >> q;
+		return 0;
+	}
+#endif
 	TEST_CLASS(FARIDA)
 	{
 		string CollectCoins_(const vector<long>& coins)
