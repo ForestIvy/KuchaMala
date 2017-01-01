@@ -9,7 +9,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	long SellTreats_DP(const vector<int>& treats)
@@ -54,6 +54,28 @@ namespace SPOJ
 		return profit;
 	}
 
+#if 0
+	int main()
+	{
+		int c;
+		cin >> c;
+
+		vector<int> treats;
+		treats.reserve(c);
+		for (int i = 0; i < c; i++)
+		{
+			int t;
+			cin >> t;
+			treats.push_back(t);
+		}
+
+		cout << SellTreats_DP(treats) << endl;
+
+		char q;
+		cin >> q;
+		return 0;
+	}
+#endif
 	TEST_CLASS(TRT)
 	{
 		long SellTreats(const vector<int>& treats)
