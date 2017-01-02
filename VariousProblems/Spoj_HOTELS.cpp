@@ -10,7 +10,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	TEST_CLASS(HOTELS)
@@ -42,6 +42,27 @@ namespace SPOJ
 			return offer;
 		}
 
+#if 0
+		int main()
+		{
+			long c, budget;
+			cin >> c >> budget;
+
+			vector<long> hotels;
+			hotels.reserve(c);
+			for (long i = 0; i < c; i++)
+			{
+				long h;
+				cin >> h;
+				hotels.push_back(h);
+			}
+			cout << GetBestOffer(budget, hotels) << endl;
+
+			char q;
+			cin >> q;
+			return 0;
+		}
+#endif
 
 	public:
 		TEST_METHOD(SingleCanBuy_No)
