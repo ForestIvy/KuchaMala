@@ -92,5 +92,8 @@
     <ClCompile Include="Spoj_HOTELS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spoj_AIBOHP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
