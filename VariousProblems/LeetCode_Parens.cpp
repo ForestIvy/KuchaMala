@@ -10,7 +10,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace LeetCode
 {
 	int LWFP(string s) // longest well formed parentheses

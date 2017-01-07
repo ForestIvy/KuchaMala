@@ -98,5 +98,8 @@
     <ClCompile Include="LeetCode_Parens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spoj_BITMAP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

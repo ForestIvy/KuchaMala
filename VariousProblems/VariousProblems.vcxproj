@@ -157,6 +157,7 @@
     <ClCompile Include="3n_plus_1.cpp" />
     <ClCompile Include="LeetCode_Parens.cpp" />
     <ClCompile Include="Spoj_AIBOHP.cpp" />
+    <ClCompile Include="Spoj_BITMAP.cpp" />
     <ClCompile Include="Spoj_BYTESM2.cpp" />
     <ClCompile Include="Spoj_FARIDA.cpp" />
     <ClCompile Include="Spoj_HOTELS.cpp" />
