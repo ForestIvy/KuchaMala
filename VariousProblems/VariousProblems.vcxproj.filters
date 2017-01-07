@@ -95,5 +95,8 @@
     <ClCompile Include="Spoj_AIBOHP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LeetCode_Parens.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
