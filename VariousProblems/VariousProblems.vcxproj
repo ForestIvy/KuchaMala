@@ -161,6 +161,7 @@
     <ClCompile Include="Spoj_ARRAYSUB.cpp" />
     <ClCompile Include="Spoj_BITMAP.cpp" />
     <ClCompile Include="Spoj_BYTESM2.cpp" />
+    <ClCompile Include="Spoj_CANTON.cpp" />
     <ClCompile Include="Spoj_FARIDA.cpp" />
     <ClCompile Include="Spoj_HOTELS.cpp" />
     <ClCompile Include="Spoj_PARTY.cpp" />

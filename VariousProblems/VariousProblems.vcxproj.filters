@@ -107,5 +107,8 @@
     <ClCompile Include="Spoj_ARRAYSUB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spoj_CANTON.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
