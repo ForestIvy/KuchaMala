@@ -15,7 +15,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	vector<long> GetMaxInRange_BF(const vector<long>& v, size_t k)
