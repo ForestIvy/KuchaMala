@@ -76,8 +76,30 @@ bool IsConforming(int max_id, vector<pair<int, int>> rels)
 
 int main()
 {
-	cout << IsConforming(3, vector<pair<int, int>>{ {1, 2}, { 2,3 }, { 1,3 } }) << endl;
+	int cases;
+	cin >> cases;
+	vector<bool> results;
 
+	while (results.size() < cases)
+	{
+		int id;
+		long rel_count;
+		cin >> id >> rel_count;
+		BugColony bc{ id };
+		for (int i = 0; i < rel_count; i++)
+		{
+			int f, s;
+			cin >> f >> s;
+			bc.AddRelationship(f, s);
+		}
+		results.push_back(bc.IsConforming());
+	}
+
+	for (int i = 0; i < cases; i++)
+	{
+		cout << "Scenario #" << to_string(i + 1) << ":" << endl;
+		cout << (results[i] ? "No suspicious bugs found!" : "Suspicious bugs found!") << endl;
+	}
 	char q;
 	cin >> q;
 	return 0;
