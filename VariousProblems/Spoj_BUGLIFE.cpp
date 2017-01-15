@@ -11,7 +11,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-#if 1
+#if 0
 namespace SPOJ
 {
 	class BugColony
@@ -68,6 +68,40 @@ namespace SPOJ
 			return true;
 		}
 	};
+
+#if 0
+	int main()
+	{
+		int cases;
+		cin >> cases;
+		vector<bool> results;
+
+		while (results.size() < cases)
+		{
+			int id;
+			long rel_count;
+			cin >> id >> rel_count;
+			BugColony bc{ id };
+			for (int i = 0; i < rel_count; i++)
+			{
+				int f, s;
+				cin >> f >> s;
+				bc.AddRelationship(f, s);
+			}
+			results.push_back(bc.IsConforming());
+		}
+
+		for (int i = 0; i < cases; i++)
+		{
+			cout << "Scenario #" << to_string(i + 1) << ":" << endl;
+			cout << (results[i] ? "No suspicious bugs found!" : "Suspicious bugs found!") << endl;
+		}
+		char q;
+		cin >> q;
+		return 0;
+	}
+#endif
+
 	TEST_CLASS(BUGLIFE)
 	{
 		bool IsConforming(int max_id, vector<pair<int, int>> rels)
