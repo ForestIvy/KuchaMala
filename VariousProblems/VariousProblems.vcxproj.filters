@@ -110,5 +110,8 @@
     <ClCompile Include="Spoj_CANTON.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spoj_BUGLIFE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

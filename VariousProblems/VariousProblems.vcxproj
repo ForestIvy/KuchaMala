@@ -160,6 +160,7 @@
     <ClCompile Include="Spoj_AIBOHP.cpp" />
     <ClCompile Include="Spoj_ARRAYSUB.cpp" />
     <ClCompile Include="Spoj_BITMAP.cpp" />
+    <ClCompile Include="Spoj_BUGLIFE.cpp" />
     <ClCompile Include="Spoj_BYTESM2.cpp" />
     <ClCompile Include="Spoj_CANTON.cpp" />
     <ClCompile Include="Spoj_FARIDA.cpp" />
