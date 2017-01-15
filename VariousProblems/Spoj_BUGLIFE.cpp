@@ -103,6 +103,16 @@ namespace SPOJ
 		{
 			Assert::IsFalse(IsConforming(5, vector<pair<int, int>>{ {1, 2}, { 3,4 }, { 4,5 }, { 5,3 }}));
 		}
+
+		TEST_METHOD(MaxValues)
+		{
+			vector<pair<int, int>> rels;
+			for (int i = 0; i < 100; i++)
+			{
+				for (int j = 0; j < 100; j++) rels.push_back({ i + 1, j + (i + 1)*100 + 1 });
+			}
+			Assert::IsTrue(IsConforming(100*100 + 100, rels));
+		}
 	};
 }
 #endif

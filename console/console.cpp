@@ -36,7 +36,7 @@ public:
 		while (start_at != seen.end())
 		{
 			*start_at = 0;
-			in_progress.push(*start_at);
+			in_progress.push(start_at - seen.begin());
 			while (!in_progress.empty())
 			{
 				int cur = in_progress.top();
